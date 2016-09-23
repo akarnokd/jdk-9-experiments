@@ -1,5 +1,7 @@
 package hu.akarnokd.java9.queue;
 
+import hu.akarnokd.java9.util.VH;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.util.Objects;
@@ -12,25 +14,11 @@ public final class SpscArrayQueue<T> {
 	
 	long consumerIndex;
 	
-	static final VarHandle ARRAY;
+	static final VarHandle ARRAY = VH.objects();
 	
-	static final VarHandle PRODUCER_INDEX;
+	static final VarHandle PRODUCER_INDEX = VH.longField(SpscArrayQueue.class, "producerIndex");
 	
-	static final VarHandle CONSUMER_INDEX;
-	
-	static {
-		try {
-			ARRAY = MethodHandles.arrayElementVarHandle(Object[].class);
-			
-			PRODUCER_INDEX = MethodHandles.lookup().in(SpscArrayQueue.class)
-					.findVarHandle(SpscArrayQueue.class, "producerIndex", Long.TYPE);
-			
-			CONSUMER_INDEX = MethodHandles.lookup().in(SpscArrayQueue.class)
-					.findVarHandle(SpscArrayQueue.class, "consumerIndex", Long.TYPE);
-		} catch (Exception ex) {
-			throw new InternalError(ex);
-		}
-	}
+	static final VarHandle CONSUMER_INDEX = VH.longField(SpscArrayQueue.class, "consumerIndex");
 	
 	public SpscArrayQueue(int capacity) {
 		this.array = new Object[capacity];

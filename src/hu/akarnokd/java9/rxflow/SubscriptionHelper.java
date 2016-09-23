@@ -1,6 +1,7 @@
 package hu.akarnokd.java9.rxflow;
 
 import java.lang.invoke.VarHandle;
+import java.util.Objects;
 import java.util.concurrent.Flow.Subscription;
 
 /**
@@ -24,7 +25,7 @@ public enum SubscriptionHelper implements Subscription {
         if (o != null) {
             s.cancel();
             if (o != CANCELLED) {
-                new RuntimeException("Subscription already set!").printStackTrace();
+                new IllegalStateException("Subscription already set!").printStackTrace();
             }
             return false;
         }
@@ -61,6 +62,18 @@ public enum SubscriptionHelper implements Subscription {
     public static boolean validate(long n) {
         if (n <= 0L) {
             new IllegalArgumentException("n > 0 required but it was " + n).printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validate(Subscription curr, Subscription next) {
+        Objects.requireNonNull(next);
+        if (curr != null) {
+            next.cancel();
+            if (curr != CANCELLED) {
+                new IllegalStateException("Subscription already set!").printStackTrace();
+            }
             return false;
         }
         return true;

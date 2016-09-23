@@ -43,7 +43,7 @@ public class SubscriptionArbiter {
     private int leave(int missed) {
         int w = (int)WIP.getAcquire(this);
         if (w == missed) {
-            w = (int)WIP.getAndAdd(this, -missed);
+            w = (int)WIP.getAndAdd(this, -missed) - missed;
         }
         return w;
     }

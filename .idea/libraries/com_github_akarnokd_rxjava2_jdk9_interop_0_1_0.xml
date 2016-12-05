@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="com.github.akarnokd:rxjava2-jdk9-interop:0.1.0" type="repository">
+    <properties maven-id="com.github.akarnokd:rxjava2-jdk9-interop:0.1.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/rxjava2-jdk9-interop-0.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxjava-2.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactive-streams-1.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/rxjava2-jdk9-interop-0.1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
